@@ -92,10 +92,12 @@ async function sendRequest(promptText: string): Promise<{ url: string, duration:
 
 async function downloadImage(outputDir: string, url: string, index: number): Promise<void> {
     try {
-        const proxy = "http://127.0.0.1:1080";
-        const envHttpProxy: string = env.HTTP_PROXY as string ?? proxy;
-        const agent = new ProxyAgent(envHttpProxy);
-        const fetchResponse = await undiciFetch(url, { dispatcher: agent });
+        let fetchOptions: any = {};
+        if (env.HTTP_PROXY) {
+            const agent = new ProxyAgent(env.HTTP_PROXY);
+            fetchOptions.dispatcher = agent;
+        }
+        const fetchResponse = await undiciFetch(url, fetchOptions);
 
         if (!fetchResponse.ok) {
             throw new Error(`Error Fetching Image: ${fetchResponse.status} ${fetchResponse.statusText}`);
