@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        /* 语言特性配置 */
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+
+        /* 类型检查配置 */
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+
+        /* 模块解析配置 */
+        "resolveJsonModule": true,  // 允许导入 .json 文件作为模块
+
+        /* Node.js 环境优化 */
+        "types": ["node"],          // 仅包含 Node.js 类型定义
+        "lib": ["ESNext"],          // 仅使用最新 ES 标准库
+
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "allowImportingTsExtensions": true,
+
+        /* 输出控制 */
+        "noEmit": true,  // 配合 tsx 直接运行
+
+        /* 源码调试 */
+        "sourceMap": true,
+        "inlineSources": true
+    },
+
+    "include": [
+        "src/**/*.ts"    // 包含所有源码
+    ],
+
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"   // 排除测试文件
+    ]
+}

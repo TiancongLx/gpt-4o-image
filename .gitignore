@@ -1,0 +1,16 @@
+# Ignore Node.js modules
+node_modules/
+
+# Ignore environment variables (contains sensitive data)
+.env
+
+# Ignore prompt file (as per .repomixignore and project usage)
+prompt.txt
+
+# Ignore output directory (contains generated files)
+output/
+
+# Ignore other common temporary files
+*.log
+*.tmp
+

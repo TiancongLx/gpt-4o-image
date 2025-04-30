@@ -1,0 +1,59 @@
+{
+    "$schema": "http://json.schemastore.org/package.json",
+
+    "name": "gpt-4o-image",
+    "version": "0.1.0",
+
+    "private": false,
+    "type": "module",
+
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+
+        "prestart": "clear",
+        "start":    "tsx ./src/main.ts"
+    },
+
+    "bin": {
+
+    },
+
+    "dependencies": {
+        "tsx": "^4.19.4",
+
+        "openai": "^4.96.2",
+        "undici": "^7.8.0",
+
+        "cac": "^6.0.0",
+
+        "nano-spawn": "^0.2.0",
+
+        "chalk": "^5.4.1",
+        "chalk-animation": "^2.0.3",
+
+        "ora": "^8.2.0",
+        "cli-spinners": "^3.2.0",
+
+        "nanoid": "^5.1.5"
+    },
+
+    "devDependencies": {
+        "@types/node": "^22.15.2",
+
+        "@types/chalk-animation": "^1.6.3",
+
+        "dotenv": "^16.5.0",
+
+        "typescript": "^5.8.3",
+
+        "npm-run-all": "^4.1.5",
+        "@antfu/ni": "^24.3.0"
+    },
+
+    "packageManager": "pnpm@10.10.0",
+    "engines": {
+        "node": ">=22.15.0",
+        "pnpm": ">=10.10.0"
+    }
+}
+
