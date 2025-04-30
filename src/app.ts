@@ -90,13 +90,23 @@ async function sendRequest(promptText: string): Promise<{ url: string, duration:
     }
 }
 
-async function downloadImage(outputDir: string, url: string, index: number): Promise<void> {
+async function downloadImage(outputDir: string, url: string, index: number, httpProxy?: string): Promise<void> {
     try {
         let fetchOptions: any = {};
-        if (env.HTTP_PROXY) {
-            const agent = new ProxyAgent(env.HTTP_PROXY);
+        let proxyToUse: string | undefined;
+
+        // 优先使用命令行传入的 httpProxy，如果未定义，则使用环境变量 env.HTTP_PROXY
+        if (httpProxy !== undefined) {
+            proxyToUse = httpProxy;
+        } else if (env.HTTP_PROXY) {
+            proxyToUse = env.HTTP_PROXY as string;
+        }
+
+        if (proxyToUse) {
+            const agent = new ProxyAgent(proxyToUse);
             fetchOptions.dispatcher = agent;
         }
+
         const fetchResponse = await undiciFetch(url, fetchOptions);
 
         if (!fetchResponse.ok) {
@@ -122,7 +132,7 @@ async function downloadImage(outputDir: string, url: string, index: number): Pro
     }
 }
 
-export async function sendRequestsConcurrently(concurrencyNum: number): Promise<void> {
+export async function sendRequestsConcurrently(concurrencyNum: number, httpProxy?: string): Promise<void> {
     const promptText = await readPromptFile();
     console.log("PROMPT:");
     console.log("------------------------------------------------------------");
@@ -146,7 +156,7 @@ export async function sendRequestsConcurrently(concurrencyNum: number): Promise<
                 if (result.duration < minDuration) {
                     minDuration = result.duration;
                 }
-                await downloadImage(outputDir, result.url, index);
+                await downloadImage(outputDir, result.url, index, httpProxy); // 传递 httpProxy
             } else {
                 console.error(chalk.red(`Invalid result for Request ${index + 1}: ${JSON.stringify(result)}`));
             }

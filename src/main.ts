@@ -21,13 +21,14 @@ async function printPromptTextAction() {
     console.log(chalk.dim(await readPromptFile()));
 }
 
+
 async function generateAction(options: any) {
     // 计算并发数，优先级：命令行 > 环境变量 > 默认值
     let concurrencyStr: string;
     if (options.concurrency !== undefined) {
         concurrencyStr = options.concurrency;
     } else if (env.CONCURRENCY_NUM !== undefined) {
-        concurrencyStr = env.CONCURRENCY_NUM;
+        concurrencyStr = env.CONCURRENCY_NUM as string; // 确保类型一致
     } else {
         concurrencyStr = '1';
     }
@@ -38,7 +39,10 @@ async function generateAction(options: any) {
         exit(1);
     }
 
-    await sendRequestsConcurrently(concurrencyNum);
+    // 获取 httpProxy，从命令行选项，如果未定义，则在 app.ts 中处理环境变量
+    const httpProxyFromCli = options.httpProxy; // 从 CLI 获取，可能是 undefined
+
+    await sendRequestsConcurrently(concurrencyNum, httpProxyFromCli);
 }
 
 // ============================================================================
@@ -53,6 +57,7 @@ function setupCLI() {
 
     cli.command("generate", "generate images from prompt")
         .option('-n, --concurrency <number>', 'concurrency number')
+        .option('--http-proxy <string>', 'HTTP proxy for image downloads, e.g., http://127.0.0.1:1080')
         .action(generateAction);
 
     cli.parse();

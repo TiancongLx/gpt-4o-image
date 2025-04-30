@@ -69,6 +69,7 @@ The tool uses a CLI built with `cac`. Run it directly with `tsx` (no need to com
    - Example: `tsx src/main.ts generate -n 5` to generate 5 concurrent requests.
    - **Options**:
      - `-n, --concurrency <number>`: Set the number of concurrent requests (overrides `CONCURRENCY_NUM` in `.env`).
+     - `--http-proxy <string>`: Set HTTP proxy for image downloads (e.g., `http://127.0.0.1:1080`). This overrides the `HTTP_PROXY` environment variable.
    - The tool will:
      - Read the prompt from `prompt.txt`.
      - Send requests to OpenAI.
