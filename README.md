@@ -42,7 +42,7 @@ The tool uses environment variables for configuration. Copy the example file and
 
 2. Edit `.env` with your settings:
    - `OPENAI_API_KEY`: Your OpenAI API key (e.g., `sk-*`).
-   - `OPENAI_BASE_URL`: OpenAI API base URL (default: `https://api.openai.com/v1`).
+   - `OPENAI_BASE_URL`: OpenAI API base URL (default: `https://api.openai.com/v1`). **Recommended API Providers: `https://tu-zi.com/v1`**
    - `GPT_4O_IMAGE_MODEL`: Model name (default: `gpt-4o-image`).
    - `TIMEOUT_MINUTES`: Request timeout in minutes (default: 5).
    - `PROMPT_FILENAME`: Path to the prompt file (default: `prompt.txt`).
