@@ -88,6 +88,7 @@ The project is organized as follows (based on the included files):
 - `.repomixignore`: Ignore patterns for repository tools.
 - `package.json`: Project metadata and dependencies.
 - `src/app.ts`: Core logic for sending requests and downloading images.
+- `src/commands.ts`: CLI command actions for print and generate.
 - `src/config.ts`: Loads environment variables using dotenv.
 - `src/main.ts`: CLI setup and entry point.
 - `src/utils.ts`: Utility functions for file operations and formatting.
